@@ -57,7 +57,7 @@ jobs:
             <p>🪁 Wind → Kite<br> ☕ No wind → Work<br> 🍻 Sunset → Repeat</p>
             <p>Built for Tarifa nomads who know that the forecast owns the calendar—not the other way around.</p>
             
-            <p>This site hosts an automatically updated iCalendar feed for the best wind windows in Tarifa.</p>
+            <p>This site hosts an automatically updated iCalendar feed for the best wind windows in Tarifa. Generate and publish an `.ics` calendar feed, using Open-Meteo.</p>
             <p><a class="button" href="tarifa-wind.ics">Open tarifa-wind.ics</a></p>
             <p>Calendar subscription URL:</p>
             <p><code id="url"></code></p>
