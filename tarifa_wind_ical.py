@@ -31,10 +31,10 @@ PROFILE = os.getenv("PROFILE", "kite").lower().strip()
 
 PROFILE_DEFAULTS = {
     "kite": {
-        "MIN_WIND_KT": 16,
-        "GOOD_WIND_KT": 20,
-        "EXCELLENT_WIND_KT": 25,
-        "MAX_GUST_KT": 40,
+        "MIN_WIND_KT": 12,
+        "GOOD_WIND_KT": 16,
+        "EXCELLENT_WIND_KT": 20,
+        "MAX_GUST_KT": 37,
         "MAX_WAVE_M": 1.8,
         "MIN_BLOCK_HOURS": 2,
     },
