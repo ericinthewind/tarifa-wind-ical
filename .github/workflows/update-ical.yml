@@ -1,0 +1,80 @@
+name: Update and publish Tarifa wind iCal
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every hour, around minute 12.
+    - cron: "12 * * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate iCal feed
+        env:
+          PROFILE: kite
+          OUTPUT_FILE: public/tarifa-wind.ics
+          FORECAST_DAYS: "7"
+          MIN_SCORE: "35"
+        run: python tarifa_wind_ical.py
+
+      - name: Create landing page
+        run: |
+          cat > public/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Tarifa Wind iCal</title>
+            <style>
+              body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 760px; margin: 48px auto; padding: 0 20px; line-height: 1.55; }
+              code { background: #f3f4f6; padding: 0.15rem 0.35rem; border-radius: 0.35rem; }
+              a.button { display: inline-block; margin: 1rem 0; padding: 0.7rem 1rem; border-radius: 0.6rem; background: #111827; color: white; text-decoration: none; }
+            </style>
+          </head>
+          <body>
+            <h1>Tarifa Wind iCal</h1>
+            <p>This site hosts an automatically updated iCalendar feed for the best wind windows in Tarifa.</p>
+            <p><a class="button" href="tarifa-wind.ics">Open tarifa-wind.ics</a></p>
+            <p>Calendar subscription URL:</p>
+            <p><code id="url"></code></p>
+            <script>
+              document.getElementById('url').textContent = new URL('tarifa-wind.ics', window.location.href).href;
+            </script>
+          </body>
+          </html>
+          HTML
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
