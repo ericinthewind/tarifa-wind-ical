@@ -51,12 +51,11 @@ jobs:
             </style>
           </head>
           <body>
-            <h1>Tarifa Wind iCal</h1>
             <h2>🏄 Work remotely. Ride irresponsibly.</h2>
-<p>This smart calendar scans the forecast and only adds the sessions worth cancelling meetings for 🌬️.</p>
-<p>Your mission is simple:</p>
-<p>🪁 Wind → Kite<br> ☕ No wind → Work<br> 🍻 Sunset → Repeat</p>
-<p>Built for Tarifa nomads who know that the forecast owns the calendar—not the other way around.</p>
+            <p>This smart calendar scans the forecast and only adds the sessions worth cancelling meetings for 🌬️.</p>
+            <p>Your mission is simple:</p>
+            <p>🪁 Wind → Kite<br> ☕ No wind → Work<br> 🍻 Sunset → Repeat</p>
+            <p>Built for Tarifa nomads who know that the forecast owns the calendar—not the other way around.</p>
             
             <p>This site hosts an automatically updated iCalendar feed for the best wind windows in Tarifa.</p>
             <p><a class="button" href="tarifa-wind.ics">Open tarifa-wind.ics</a></p>
